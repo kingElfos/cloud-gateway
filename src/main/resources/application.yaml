@@ -1,7 +1,7 @@
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: https://eureka-service.onrender.com/eureka/
 
 spring:
   application:
@@ -12,7 +12,7 @@ spring:
         corsConfigurations:
           "[/**]":
             allowedOriginPatterns:
-              - "http://localhost:*"
+              - "*"
             allowedMethods:
               - GET
               - POST
@@ -33,7 +33,7 @@ spring:
           uri: lb://NOTIFICATIONS
           predicates:
             - Path=/api/notifications/** , /websocket
-            
+
 springdoc:
   enable-native-support: true
   api-docs:
@@ -43,17 +43,10 @@ springdoc:
     path: /swagger-ui.html
     config-url: /v3/api-docs/swagger-config
     urls:
-      - url: /v3/api-docs
-        name: API Gateway Service
-        primaryName: API Gateway Service
-
-      - url: /event-service/v3/api-docs
+      - url: https://event-service.onrender.com/v3/api-docs
         name: Event Service
-        primaryName: Event Service
-
-      - url: /notification-service/v3/api-docs
-        name: Notification Service
-        primaryName: Notification Service            
+      - url: https://notification-service.onrender.com/v3/api-docs
+        name: Notification Service            
 
 server:
-  port: 8082
+  port: ${PORT:8082}
